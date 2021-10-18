@@ -46,11 +46,11 @@ __Modify telegraf configuration__
   command = ["/path/to/telegraf-input-db2/db2_metrics.sh"]
   signal = "none"
 ```
-Replace `/path/to/telegraf-input-oracle` with a directory of your clone. The 
+Replace `/path/to/telegraf-input-db2` with a directory of your clone. The 
 `db2_metrics.sh` executes the python script and also ensures that DB2
 user password is not printed in telegraf logs.
 
-__Modify /path/to/telegraf-input-oracle/oracle_metrics.sh__
+__Modify /path/to/telegraf-input-db2/db2_metrics.sh__
 
 - Modify `hostname`, `port` and `database` or your DB2 connection.
 - Modify username and password of your DB2 user.
