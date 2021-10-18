@@ -13,17 +13,10 @@ metric = "db2"
 
 
 def log(log_type, log_msg, host, db):
-    msg = "{0}_integration,host={1},database={2},type={3},msg={4} msg=1".format(
-        metric,
-        host,
-        db,
-        log_type,
-        log_msg.replace(" ", "\\ "))
-
-    if debug == False and msg != None:
-        print(msg)
-    else:
-        print("[debug] {0}".format(msg))
+    if debug == True:
+        print("[debug/{0}] {1}".format(log_type, log_msg))
+    elif log_type == "error":
+        sys.stderr.write("{0}|{1}|{2}: {3}\n".format(log_type, host, db, log_msg))
 
 
 def handle_error(error_message, host, db):
