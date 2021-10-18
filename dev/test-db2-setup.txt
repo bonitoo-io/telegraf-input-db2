@@ -1,0 +1,15 @@
+docker run -itd --name mydb2 --privileged=true -p 50000:50000 -e LICENSE=accept -e DB2INST1_PASSWORD=changeit -e DBNAME=testdb ibmcom/db2
+
+docker exec -it mydb2 /bin/bash
+export PATH=$PATH:/database/config/db2inst1/sqllib/bin
+export DB2INSTANCE=db2inst1
+db2 "attach to db2inst1 user db2inst1 using changeit"
+db2 "update dbm cfg using HEALTH_MON on"
+db2 "update dbm cfg using DFT_MON_STMT on"
+db2 "update dbm cfg using DFT_MON_LOCK on"
+db2 "update dbm cfg using DFT_MON_TABLE on"
+db2 "update dbm cfg using DFT_MON_BUFPOOL on"
+db2 "get dbm cfg"
+
+pip3 install ibm_db
+telegraf --config ./dev/telegraf.conf --input-filter execd --test
