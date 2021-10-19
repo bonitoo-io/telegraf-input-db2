@@ -6,7 +6,7 @@ PORT=50000
 # Database name
 DB=testdb
 # Database user
-USER=db2inst1
+USERNAME=db2inst1
 PASSWORD=changeit
 
 SCRIPT=`dirname $0`/db2_metrics.py
@@ -15,4 +15,4 @@ SCRIPT=`dirname $0`/db2_metrics.py
 ## The recommended approach is to export then before running telegraf.
 # export LD_LIBRARY_PATH=/opt/oracle/client
 
-python3 "$SCRIPT" --host "$HOST" --port "$PORT" --db "$DB" --user "$USER" --passwd "$PASSWORD"
+python3 "$SCRIPT" --host "$HOST" --port "$PORT" --db "$DB" --user "$USERNAME" --passwd "$PASSWORD"

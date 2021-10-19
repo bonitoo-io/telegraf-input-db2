@@ -7,7 +7,7 @@ This repository contains a telegraf external plugin that collects metrics from D
 The plugin executes a python script to gather metrics. It requires proper installation of [python3](https://www.python.org/downloads/) with [ibm_db](https://github.com/ibmdb/python-ibmdb) extension module. The extension module might require extra environment variables, which must be set. 
 
 __Setting up the appropriate privileges in DB2__
-This integration needs to execute queries on performance resources. Switch to the instance master user (e.g. DB2INST1) and run these commands in `db2` CLI. You should start the database and connect to the database of your choice before running these.
+This integration needs to execute queries on DB2 performance resources. Switch to the instance master user (e.g. DB2INST1) and run these commands in `db2` CLI. You should start the database and attach to the database before running these, see [test setup example](./dev/test-db2-setup.txt).
 
 ```sh
 db2 "update dbm cfg using HEALTH_MON on"
@@ -53,8 +53,7 @@ user password is not printed in telegraf logs.
 __Modify /path/to/telegraf-input-db2/db2_metrics.sh__
 
 - Modify `hostname`, `port` and `database` or your DB2 connection.
-- Modify username and password of your DB2 user.
-- Modify the value of `instance` tag of the generated metrics.
+- Modify `username` and `password` of your DB2 user.
 
 ### Metrics
 
