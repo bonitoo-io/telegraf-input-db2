@@ -42,9 +42,10 @@ git clone git@github.com:bonitoo-io/telegraf-input-db2.git
 __Modify telegraf configuration__
 
 ```toml
-[[inputs.execd]]
-  command = ["/path/to/telegraf-input-db2/db2_metrics.sh"]
-  signal = "none"
+[[inputs.exec]]
+  commands = ["/path/to/telegraf-input-db2/db2_metrics.sh"]
+  timeout = "60s"
+  data_format = "influx"
 ```
 Replace `/path/to/telegraf-input-db2` with a directory of your clone. The 
 `db2_metrics.sh` executes the python script and also ensures that DB2
@@ -58,7 +59,7 @@ __Modify /path/to/telegraf-input-db2/db2_metrics.sh__
 ### Metrics
 
 ```
-$ telegraf --config ./dev/telegraf.conf --input-filter execd --test
+$ telegraf --config ./dev/telegraf.conf --input-filter exec --test
 > db2_instance,database=testdb,host=localhost,product_name=DB2\ v11.5.6.0,server_platform=Linux/X8664 gw_total_cons=0,total_connections=2 1634580099000000000
 > db2_database,database=testdb,db_status=ACTIVE,host=localhost appls_cur_cons=1,appls_in_db2=1,connections_top=20,deadlocks=0,last_backup="2021-10-18T14:40:12",lock_list_in_use=38400,lock_timeouts=0,lock_wait_time=0,lock_waits=0,num_locks_held=3,num_locks_waiting=0,rows_deleted=0,rows_inserted=0,rows_modified=0,rows_read=728,rows_returned=1,rows_updated=0,total_cons=2 1634580099000000000
 > db2_buffer,bp_name=IBMDEFAULTBP,database=testdb,host=localhost pool_async_col_lbp_pages_found=0,pool_async_data_lbp_pages_found=27,pool_async_index_lbp_pages_found=0,pool_async_xda_lbp_pages_found=0,pool_col_gbp_l_reads=0,pool_col_gbp_p_reads=0,pool_col_l_reads=0,pool_col_lbp_pages_found=0,pool_col_p_reads=0,pool_data_gbp_l_reads=0,pool_data_gbp_p_reads=0,pool_data_l_reads=1000,pool_data_lbp_pages_found=897,pool_data_p_reads=168,pool_index_gbp_l_reads=0,pool_index_gbp_p_reads=0,pool_index_l_reads=912,pool_index_lbp_pages_found=699,pool_index_p_reads=213,pool_temp_col_l_reads=0,pool_temp_col_p_reads=0,pool_temp_data_l_reads=0,pool_temp_data_p_reads=0,pool_temp_index_l_reads=0,pool_temp_index_p_reads=0,pool_temp_xda_l_reads=0,pool_temp_xda_p_reads=0,pool_xda_gbp_l_reads=0,pool_xda_gbp_p_reads=0,pool_xda_l_reads=0,pool_xda_lbp_pages_found=0,pool_xda_p_reads=0 1634580099000000000
